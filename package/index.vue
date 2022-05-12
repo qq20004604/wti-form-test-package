@@ -139,6 +139,8 @@
                 baseURL: 'https://ribao.wti-xa.com',
             });
             this.loadCache();
+
+            this.loadAllWtiForm();
         },
         data () {
             return {
@@ -197,11 +199,13 @@
                     this.show = false;
                     return;
                 }
+
                 // 方法是从 window.App 开始往下递归遍历，找到 WtiForm 组件，则添加到list里
                 const list = this._getChildrenWtiForm(window.App);
 
                 // 如果没有 WtiForm 表单组件，说明父组件获取失败，直接return
                 if (list.length === 0) {
+                    this.show = false;
                     console.error('未找到 WtiForm 表单组件');
                 }
                 return list;
